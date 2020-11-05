@@ -22,6 +22,6 @@ urlpatterns = [
     path('getMatchlist/', include('getMatchlist.urls')),
     path('getMatches/', include('getMatches.urls')),
     path('createDatas/', include('createDatas.urls')),
-    # path('check/', include('check.urls')),
+    path('check/', include('check.urls')),
 ]
 
