@@ -1,2 +1,2 @@
 # Server
-This server uses Django
+This server uses Django Framework
