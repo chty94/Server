@@ -23,7 +23,7 @@ def result(request, summonerName):
     testDf = pd.DataFrame(db['{}_datas'.format(summonerName)].find())
     # load the model from disk
     filename = 'LinearRegression.sav'
-    loaded_model = joblib.load(os.getcwd() + "\\result\\" + filename)
+    loaded_model = joblib.load(os.getcwd() + "/result/" + filename)
 
     x_cols = testDf.drop(['_id', 'accountId'], axis=1).columns.tolist()
     x_test = testDf[x_cols]

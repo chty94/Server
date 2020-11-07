@@ -5,6 +5,7 @@ import requests, re, time, json, sys, random
 from pymongo import MongoClient
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from pyvirtualdisplay import Display
 from datetime import datetime, timedelta
 from time import sleep
 import os
@@ -54,10 +55,12 @@ def crollTier(summonerName):
     result = {}
 
     newCollection = db['{}_summoners'.format(summonerName)]
-
+    display = Display(visible=0, size=(1024, 768))
+    display.start()
+    path = '/home/ubuntu/Server/scaut/chromedriver'
     try:
         URL = 'https://www.leagueofgraphs.com/ko/summoner/kr/{summonerName}'
-        driver = webdriver.Chrome()
+        driver = webdriver.Chrome(path)
         driver.get(URL.format(summonerName=summonerName.replace(' ', '+')))
         soup = BeautifulSoup(driver.page_source, 'html.parser')
         script = soup.select_one('#rankingHistory-1 > script:nth-child(3)')
@@ -321,6 +324,7 @@ def check(summonerName):
  
 def search(request, summonerName):
     # redundancy check and sequence check
+
     check(summonerName)
 
     # Crolling the User's Tier
