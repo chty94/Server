@@ -37,11 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'crollTier.apps.CrolltierConfig',
-    'getMatchlist.apps.GetmatchlistConfig',
-    'getMatches.apps.GetmatchesConfig',
-    'createDatas.apps.CreatedatasConfig',
-    'check.apps.CheckConfig'
 ]
 
 MIDDLEWARE = [
