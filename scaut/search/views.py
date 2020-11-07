@@ -30,6 +30,7 @@ db = client['tempUser']
 
 
 # CrollTier
+crollingpossible = 0
 def integer_to_tier_rank(i):
     if i > 24:
         return _TIERS[6 + i - 25], _RANKS[3]
@@ -54,13 +55,20 @@ def crollTier(summonerName):
 
     newCollection = db['{}_summoners'.format(summonerName)]
 
-    URL = 'https://www.leagueofgraphs.com/ko/summoner/kr/{summonerName}'
-    driver = webdriver.Chrome()
-    driver.get(URL.format(summonerName=summonerName.replace(' ', '+')))
-    soup = BeautifulSoup(driver.page_source, 'html.parser')
-    script = soup.select_one('#rankingHistory-1 > script:nth-child(3)')
-    match = re.compile("data: (.*)").search(str(script))
-    datas = filterTimeStamps(json.loads(match.group(1)[:-1]))
+    try:
+        URL = 'https://www.leagueofgraphs.com/ko/summoner/kr/{summonerName}'
+        driver = webdriver.Chrome()
+        driver.get(URL.format(summonerName=summonerName.replace(' ', '+')))
+        soup = BeautifulSoup(driver.page_source, 'html.parser')
+        script = soup.select_one('#rankingHistory-1 > script:nth-child(3)')
+        match = re.compile("data: (.*)").search(str(script))
+        datas = filterTimeStamps(json.loads(match.group(1)[:-1]))
+    except:
+        global crollingpossible
+        newCollection.drop()
+        crollingpossible = 1
+        driver.close()
+        return
 
     v = {}
     v['Tier'] = datas[-1][1]
@@ -316,8 +324,11 @@ def search(request, summonerName):
     check(summonerName)
 
     # Crolling the User's Tier
+    global crollingpossible
     crollTier(summonerName)
-    
+    if crollingpossible == 1:
+        return HttpResponse('fail')
+
     # Getting Matchlist of User
     getMatchlist(summonerName)
     

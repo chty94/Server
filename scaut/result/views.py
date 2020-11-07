@@ -16,7 +16,6 @@ def result(request, summonerName):
     # Tier = list(user.find({}))[0]['Tier']
     # print(Tier)
 
-
     model_ = client['userINFO']
     model_df = pd.DataFrame(model_['16_500_datas'].find())
     # model_df = pd.DataFrame(model_['{}_500_datas'.format(Tier)].find())
