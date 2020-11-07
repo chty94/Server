@@ -26,7 +26,7 @@ FEATURES = ('kills', 'deaths', 'assists', 'largestKillingSpree', 'largestMultiKi
     'totalDamageDealt', 'totalDamageDealtToChampions', 'totalDamageTaken', 'goldEarned', 'goldSpent',
     'totalMinionsKilled', 'totalTimeCrowdControlDealt', 'champLevel'
     )
-client = MongoClient('localhost', 27017)
+client = MongoClient('localhost', 27017, username='Riot', password='Riot')
 db = client['tempUser']
 
 
@@ -136,9 +136,6 @@ def getMatchlist(summonerName):
 # GetMatches
 def getMatches(summonerName):
     MATCH_URL = 'https://kr.api.riotgames.com/lol/match/v4/matches/{}?api_key={}'
-
-    client = MongoClient('localhost', 27017)
-    db = client['tempUser']
 
     summoners = list(db['{}_summoners'.format(summonerName)].find({}))
     newCollection = db['{}_matches'.format(summonerName)]

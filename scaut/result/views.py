@@ -9,7 +9,7 @@ import os
 
 # Create your views here.
 def result(request, summonerName):
-    client = MongoClient('localhost', 27017)
+    client = MongoClient('localhost', 27017, username='Riot', password='Riot')
     db = client['tempUser']
     
     # user = db['{}_summoners'.format(summonerName)]

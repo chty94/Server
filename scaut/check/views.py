@@ -5,7 +5,7 @@ from pymongo import MongoClient
 # Create your views here.
 
 def check(request, summonerName):
-    client = MongoClient('localhost', 27017)
+    client = MongoClient('localhost', 27017, username='Riot', password='Riot')
     db = client['tempUser']
 
     # 프론트에서 받아야할 변수
