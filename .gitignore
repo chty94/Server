@@ -1,0 +1,4 @@
+docker-compose.yml
+log/
+nginx/
+scaut/uwsgi.ini
