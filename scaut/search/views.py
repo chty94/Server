@@ -57,7 +57,7 @@ def crollTier(summonerName):
     newCollection = db['{}_summoners'.format(summonerName)]
     display = Display(visible=0, size=(1024, 768))
     display.start()
-    path = '/home/ubuntu/Server/scaut/chromedriver'
+    path = '/home/ubuntu/chromedriver'
     try:
         URL = 'https://www.leagueofgraphs.com/ko/summoner/kr/{summonerName}'
         driver = webdriver.Chrome(path)
